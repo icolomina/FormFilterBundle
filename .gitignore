@@ -1,0 +1,4 @@
+## IDE files to ignore
+nbproject/
+.idea/
+*.tmproj

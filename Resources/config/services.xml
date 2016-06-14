@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+
+    <services>
+
+        <!-- Form filter manager service -->
+        <service id="ict_form_filter_bundle.form_filter_manager" class="EasyFormFilterBundle\Manager\FormFilterManager" >
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="ict_easy_form_filter.form_filter_data_manager"></argument>
+            <configurator service="ict_form_filter_bundle.form_filter_manager_configurator" method="configure" ></configurator>
+        </service>
+
+        <service id="ict_form_filter_bundle.form_filter_manager_configurator" class="EasyFormFilterBundle\Manager\FormFilterManagerConfigurator">
+            <argument type="service" id="ict_form_filter_bundle.adapters_collection"></argument>
+            <argument type="string">%ict_easy_form_filter.adapter_name%</argument>
+        </service>
+
+        <service id="ict_easy_form_filter.form_filter_data_manager" class="EasyFormFilterBundle\Manager\FormFilterDataManager">
+            <argument type="service" id="session" />
+            <argument type="string">%ict_easy_form_filter.manage_session_data%</argument>
+        </service>
+
+        <!-- Adapters -->
+        <service id="ict_form_filter_bundle.dbal_adapter" class="EasyFormFilterBundle\Adapter\DbalConditionAdapter" lazy="true">
+            <tag name="ict_form_filter_bundle.adapter" alias="dbal"></tag>
+        </service>
+        <service id="ict_form_filter_bundle.orm_adapter" class="EasyFormFilterBundle\Adapter\DoctrineORMConditionAdapter" lazy="true">
+            <tag name="ict_form_filter_bundle.adapter" alias="orm"></tag>
+        </service>
+        <service id="ict_form_filter_bundle.odm_adapter" class="EasyFormFilterBundle\Adapter\DoctrineODMConditionAdapter" lazy="true">
+            <tag name="ict_form_filter_bundle.adapter" alias="odm"></tag>
+        </service>
+        <service id="ict_form_filter_bundle.propel_adapter" class="EasyFormFilterBundle\Adapter\PropelConditionAdapter" lazy="true">
+            <tag name="ict_form_filter_bundle.adapter" alias="propel"></tag>
+        </service>
+
+        <service id="ict_form_filter_bundle.adapters_collection" class="EasyFormFilterBundle\Data\AdaptersCollection"></service>
+
+        <!-- Events -->
+        <service id="ict_form_filter_bundle.query_built_listener" class="EasyFormFilterBundle\Event\Listener\QueryBuiltListener">
+            <argument type="service" id="session"></argument>
+            <tag name="kernel.event_listener" event="query.built" method="onQueryBuilt"></tag>
+        </service>
+
+    </services>
+
+</container>
