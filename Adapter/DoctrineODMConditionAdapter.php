@@ -3,6 +3,7 @@
 namespace Ict\FormFilterBundle\Adapter;
 
 use Doctrine\ODM\MongoDB\Query\Builder;
+use Ict\FormFilterBundle\Comparission\Comparision;
 
 class DoctrineODMConditionAdapter implements ConditionAdapterInterface
 {

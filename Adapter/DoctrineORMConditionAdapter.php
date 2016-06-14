@@ -3,7 +3,7 @@
 namespace Ict\FormFilterBundle\Adapter;
 
 use Doctrine\ORM\QueryBuilder;
-use Ict\EasyFormFilterBundle\Comparission\Comparision;
+use Ict\FormFilterBundle\Comparission\Comparision;
 use PhpCollection\Map;
 
 class DoctrineORMConditionAdapter implements SqlConditionAdapterInterface

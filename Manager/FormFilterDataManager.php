@@ -19,6 +19,7 @@ class FormFilterDataManager
 
     /**
      * FormFilterDataManager constructor.
+     * @param SessionInterface $session
      * @param $manageSessionData
      */
     public function __construct(SessionInterface $session, $manageSessionData)

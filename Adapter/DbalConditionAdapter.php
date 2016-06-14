@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: igncoto
- * Date: 13/6/16
- * Time: 13:12
- */
 
 namespace Ict\FormFilterBundle\Adapter;
 
 use Doctrine\DBAL\Query\QueryBuilder;
-use Ict\EasyFormFilterBundle\Comparission\Comparision;
+use Ict\FormFilterBundle\Comparission\Comparision;
 
 class DbalConditionAdapter implements SqlConditionAdapterInterface
 {

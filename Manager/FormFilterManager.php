@@ -3,11 +3,10 @@
 namespace Ict\FormFilterBundle\Manager;
 
 use Ict\FormFilterBundle\Event\QueryBuiltEvent;
-use FI\CNWBundle\Form\ConditionAdapterInterface;
+use Ict\FormFilterBundle\Adapter\ConditionAdapterInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FormFilterManager
 {
@@ -39,7 +38,7 @@ class FormFilterManager
 
 
     /**
-     * @param \FI\CNWBundle\Form\ConditionAdapterInterface $adapter
+     * @param ConditionAdapterInterface $adapter
      */
     public function setAdapter(ConditionAdapterInterface $adapter)
     {
@@ -64,9 +63,11 @@ class FormFilterManager
     public function build(Request $request, Form $form){
 
         $data = $this->formFilterDataManager->getData($form, $request->getMethod(), $request->query->get('page', false));
+        $filters = $form->getConfig()->getOption('filters');
 
-        foreach($form->getConfig()->getOption('filters') as $comparision){
+        while($filters->valid()){
 
+            $comparision = $filters->current();
             if($data->containsKey($comparision->getFormField())){
 
                 if(!method_exists($this->adapter, $comparision->getType())){
@@ -78,6 +79,8 @@ class FormFilterManager
                     array($comparision, $data->get($comparision->getFormField()))
                 );
             }
+
+            $filters->next();
 
         }
 

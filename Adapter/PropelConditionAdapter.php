@@ -2,7 +2,7 @@
 
 namespace Ict\FormFilterBundle\Adapter;
 
-use Ict\EasyFormFilterBundle\Comparission\Comparision;
+use Ict\FormFilterBundle\Comparission\Comparision;
 
 class PropelConditionAdapter implements SqlConditionAdapterInterface
 {

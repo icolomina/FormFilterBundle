@@ -3,7 +3,7 @@
 namespace Ict\FormFilterBundle\Data;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Ict\EasyFormFilterBundle\Adapter\ConditionAdapterInterface;
+use Ict\FormFilterBundle\Adapter\ConditionAdapterInterface;
 
 class AdaptersCollection implements \IteratorAggregate
 {

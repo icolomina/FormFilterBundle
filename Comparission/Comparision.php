@@ -2,28 +2,28 @@
 
 namespace Ict\FormFilterBundle\Comparission;
 
-use PhpCollection\Map;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Comparision
 {
     /**
      *
-     * @var type 
+     * @var string
      */
     protected $formField;
     
     /**
-     * @var
+     * @var string
      */
     protected $field;
 
     /**
-     * @var
+     * @var string
      */
     protected $type;
 
     /**
-     * @var
+     * @var array
      */
     protected $extra;
 
@@ -39,7 +39,7 @@ class Comparision
         $this->formField = $formField;
         $this->field = $field;
         $this->type  = $type;
-        $this->extra = new Map($extra);
+        $this->extra = new ArrayCollection($extra);
     }
     
     /**
@@ -64,7 +64,8 @@ class Comparision
      */
     public function getNormalizedField(){
 
-        if(strpos($this->field, '.') !== false){
+        if(strpos($this->field, '.') !== false)
+        {
             list($beforeDot, $afterDot) = explode('.', $this->field);
             return $afterDot;
         }
